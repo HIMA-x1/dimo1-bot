@@ -14,7 +14,9 @@ let currentBrand = 'linebet';
 let currentBalance = 50000.00; // رصيد الحساب المبدئي
 
 function updateBalanceUI() {
-  accountBalanceDisplay.textContent = currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (accountBalanceDisplay) {
+    accountBalanceDisplay.textContent = currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
 }
 
 const brands = {
@@ -36,105 +38,134 @@ function setBrand(name) {
     if (el.classList.contains('nav-tab')) el.classList.toggle('active', active);
     if (el.classList.contains('brand-choice')) el.classList.toggle('selected', active);
   });
-  result.hidden = true;
+  if (result) result.hidden = true;
 }
+
 document.querySelectorAll('[data-brand]').forEach(el => el.addEventListener('click', () => setBrand(el.dataset.brand)));
 
-userId.addEventListener('input', () => {
-  userId.value = userId.value.replace(/\D/g, '').slice(0, 10);
-  const count = userId.value.length;
-  idHint.textContent = count === 10 ? 'اكتمل الرقم — جاهز للشحن.' : `متبقي ${10 - count} أرقام.`;
-  idHint.style.color = count === 10 ? 'var(--accent)' : '';
-});
+if (userId) {
+  userId.addEventListener('input', () => {
+    userId.value = userId.value.replace(/\D/g, '').slice(0, 10);
+    const count = userId.value.length;
+    idHint.textContent = count === 10 ? 'اكتمل الرقم — جاهز للشحن.' : `متبقي ${10 - count} أرقام.`;
+    idHint.style.color = count === 10 ? 'var(--accent)' : '';
+  });
+}
 
 document.querySelectorAll('[data-amount]').forEach(btn => btn.addEventListener('click', () => {
-  amount.value = btn.dataset.amount;
-  amount.focus();
+  if (amount) {
+    amount.value = btn.dataset.amount;
+    amount.focus();
+  }
 }));
 
 // تنفيذ عملية الشحن وخصم المبلغ من الرصيد
-document.getElementById('demoForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const id = userId.value.trim();
-  const value = amount.value.trim();
-  
-  if (!/^\d{10}$/.test(id)) {
-    idHint.textContent = 'من فضلك أدخل 10 أرقام بالضبط.';
-    idHint.style.color = '#ff777f';
-    userId.focus();
-    return;
-  }
-  
-  const chargeVal = Number(value);
-  if (!/^\d+(?:\.\d{1,2})?$/.test(value) || chargeVal <= 0) {
-    amount.setCustomValidity('أدخل مبلغ شحن صحيح أكبر من صفر.');
-    amount.reportValidity();
-    amount.setCustomValidity('');
-    amount.focus();
-    return;
-  }
+const demoForm = document.getElementById('demoForm');
+if (demoForm) {
+  demoForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = userId.value.trim();
+    const value = amount.value.trim();
+    
+    if (!/^\d{10}$/.test(id)) {
+      idHint.textContent = 'من فضلك أدخل 10 أرقام بالضبط.';
+      idHint.style.color = '#ff777f';
+      userId.focus();
+      return;
+    }
+    
+    const chargeVal = Number(value);
+    if (!/^\d+(?:\.\d{1,2})?$/.test(value) || chargeVal <= 0) {
+      amount.setCustomValidity('أدخل مبلغ شحن صحيح أكبر من صفر.');
+      amount.reportValidity();
+      amount.setCustomValidity('');
+      amount.focus();
+      return;
+    }
 
-  if (chargeVal > currentBalance) {
-    alert('رصيد الحساب المتاح غير كافٍ لإتمام عملية الشحن هذه.');
-    return;
-  }
+    if (chargeVal > currentBalance) {
+      alert('رصيد الحساب المتاح غير كافٍ لإتمام عملية الشحن هذه.');
+      return;
+    }
 
-  // خصم المبلغ من الرصيد وتحديث الواجهة
-  currentBalance -= chargeVal;
-  updateBalanceUI();
+    // خصم المبلغ من الرصيد وتحديث الواجهة
+    currentBalance -= chargeVal;
+    updateBalanceUI();
 
-  resultDetails.textContent = `ID: ${id} | Amount: ${chargeVal.toFixed(2)}`;
-  result.hidden = false;
-  result.scrollIntoView({behavior:'smooth', block:'nearest'});
-});
+    resultDetails.textContent = `ID: ${id} | Amount: ${chargeVal.toFixed(2)}`;
+    result.hidden = false;
+    result.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+}
 
 // إجبار تسجيل الدخول أول فتح الموقع
 window.addEventListener('DOMContentLoaded', () => {
-  loginPanel.hidden = false;
-  document.getElementById('username').focus();
+  if (loginPanel) loginPanel.hidden = false;
+  const usernameInput = document.getElementById('username');
+  if (usernameInput) usernameInput.focus();
   updateBalanceUI();
 });
 
-document.getElementById('loginForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const u = document.getElementById('username').value;
-  const p = document.getElementById('password').value;
-  const msg = document.getElementById('loginMessage');
-  
-  if (u === 'demo' && p === 'demo123') {
-    msg.textContent = 'تم تسجيل الدخول بنجاح ✓';
-    setTimeout(() => { 
-      loginPanel.hidden = true; 
-      msg.textContent = ''; 
-    }, 600);
-  } else {
-    msg.textContent = 'بيانات الدخول غير صحيحة.';
-  }
-});
+// معالجة تسجيل الدخول للموبايل والكمبيوتر
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault(); // منع إعادة تحميل الصفحة
+    
+    // تنظيف المدخلات وحذف المسافات التي يضيفها الموبايل تلقائياً
+    const u = document.getElementById('username').value.trim().toLowerCase();
+    const p = document.getElementById('password').value.trim();
+    const msg = document.getElementById('loginMessage');
+    
+    if (u === 'demo' && p === 'demo123') {
+      msg.textContent = 'تم تسجيل الدخول بنجاح ✓';
+      msg.style.color = 'var(--accent)';
+      setTimeout(() => { 
+        loginPanel.hidden = true; 
+        msg.textContent = ''; 
+      }, 500);
+    } else {
+      msg.textContent = 'بيانات الدخول غير صحيحة.';
+      msg.style.color = '#ff777f';
+    }
+    return false;
+  });
+}
 
 // فتح شاشة إضافة رصيد الحساب للأدمن
-document.getElementById('adminBalanceBtn').addEventListener('click', () => {
-  addBalancePanel.hidden = false;
-  document.getElementById('addAmount').focus();
-});
+const adminBalanceBtn = document.getElementById('adminBalanceBtn');
+if (adminBalanceBtn) {
+  adminBalanceBtn.addEventListener('click', () => {
+    if (addBalancePanel) {
+      addBalancePanel.hidden = false;
+      document.getElementById('addAmount').focus();
+    }
+  });
+}
 
-document.getElementById('closeAddBalance').addEventListener('click', () => {
-  addBalancePanel.hidden = true;
-});
+const closeAddBalance = document.getElementById('closeAddBalance');
+if (closeAddBalance) {
+  closeAddBalance.addEventListener('click', () => {
+    if (addBalancePanel) addBalancePanel.hidden = true;
+  });
+}
 
-document.getElementById('addBalanceForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const addVal = Number(document.getElementById('addAmount').value);
-  const msg = document.getElementById('addBalanceMsg');
-  
-  if (addVal > 0) {
-    currentBalance += addVal;
-    updateBalanceUI();
-    msg.textContent = `تم إضافة ${addVal.toLocaleString()} ج.م للرصيد بنجاح ✓`;
-    setTimeout(() => {
-      addBalancePanel.hidden = true;
-      msg.textContent = '';
-      document.getElementById('addAmount').value = '';
-    }, 900);
-  }
-});
+const addBalanceForm = document.getElementById('addBalanceForm');
+if (addBalanceForm) {
+  addBalanceForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const addVal = Number(document.getElementById('addAmount').value);
+    const msg = document.getElementById('addBalanceMsg');
+    
+    if (addVal > 0) {
+      currentBalance += addVal;
+      updateBalanceUI();
+      msg.textContent = `تم إضافة ${addVal.toLocaleString()} ج.م للرصيد بنجاح ✓`;
+      setTimeout(() => {
+        if (addBalancePanel) addBalancePanel.hidden = true;
+        msg.textContent = '';
+        document.getElementById('addAmount').value = '';
+      }, 900);
+    }
+  });
+}
