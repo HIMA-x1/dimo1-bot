@@ -7,7 +7,15 @@ const userId = document.getElementById('userId');
 const amount = document.getElementById('amount');
 const idHint = document.getElementById('idHint');
 const loginPanel = document.getElementById('loginPanel');
+const addBalancePanel = document.getElementById('addBalancePanel');
+const accountBalanceDisplay = document.getElementById('accountBalanceDisplay');
+
 let currentBrand = 'linebet';
+let currentBalance = 50000.00; // رصيد الحساب المبدئي
+
+function updateBalanceUI() {
+  accountBalanceDisplay.textContent = currentBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 
 const brands = {
   linebet: {name:'LINEBET', color:'#25c26e', rgb:'37,194,110', logo:'assets/linebet-logo.jpg', alt:'شعار LINEBET'},
@@ -44,42 +52,89 @@ document.querySelectorAll('[data-amount]').forEach(btn => btn.addEventListener('
   amount.focus();
 }));
 
+// تنفيذ عملية الشحن وخصم المبلغ من الرصيد
 document.getElementById('demoForm').addEventListener('submit', e => {
   e.preventDefault();
   const id = userId.value.trim();
   const value = amount.value.trim();
+  
   if (!/^\d{10}$/.test(id)) {
     idHint.textContent = 'من فضلك أدخل 10 أرقام بالضبط.';
     idHint.style.color = '#ff777f';
     userId.focus();
     return;
   }
-  // Accept positive decimal amounts only; no network or financial operation occurs.
-  if (!/^\d+(?:\.\d{1,2})?$/.test(value) || Number(value) <= 0) {
+  
+  const chargeVal = Number(value);
+  if (!/^\d+(?:\.\d{1,2})?$/.test(value) || chargeVal <= 0) {
     amount.setCustomValidity('أدخل مبلغ شحن صحيح أكبر من صفر.');
     amount.reportValidity();
     amount.setCustomValidity('');
     amount.focus();
     return;
   }
-  resultDetails.textContent = `ID: ${id} | Amount: ${Number(value).toFixed(2)}`;
+
+  if (chargeVal > currentBalance) {
+    alert('رصيد الحساب المتاح غير كافٍ لإتمام عملية الشحن هذه.');
+    return;
+  }
+
+  // خصم المبلغ من الرصيد وتحديث الواجهة
+  currentBalance -= chargeVal;
+  updateBalanceUI();
+
+  resultDetails.textContent = `ID: ${id} | Amount: ${chargeVal.toFixed(2)}`;
   result.hidden = false;
   result.scrollIntoView({behavior:'smooth', block:'nearest'});
 });
 
-const openLogin = () => { loginPanel.hidden = false; document.getElementById('username').focus(); };
-document.getElementById('loginToggle').addEventListener('click', openLogin);
-document.getElementById('closeLogin').addEventListener('click', () => loginPanel.hidden = true);
-loginPanel.addEventListener('click', e => { if (e.target === loginPanel) loginPanel.hidden = true; });
+// إجبار تسجيل الدخول أول فتح الموقع
+window.addEventListener('DOMContentLoaded', () => {
+  loginPanel.hidden = false;
+  document.getElementById('username').focus();
+  updateBalanceUI();
+});
+
 document.getElementById('loginForm').addEventListener('submit', e => {
   e.preventDefault();
   const u = document.getElementById('username').value;
   const p = document.getElementById('password').value;
   const msg = document.getElementById('loginMessage');
+  
   if (u === 'demo' && p === 'demo123') {
     msg.textContent = 'تم تسجيل الدخول بنجاح ✓';
-    setTimeout(() => { loginPanel.hidden = true; msg.textContent = ''; }, 900);
+    setTimeout(() => { 
+      loginPanel.hidden = true; 
+      msg.textContent = ''; 
+    }, 600);
   } else {
-    msg.textContent = 'بيانات الدخول غير صحيحة. استخدم البيانات الموضحة أدناه.';
+    msg.textContent = 'بيانات الدخول غير صحيحة.';
+  }
+});
+
+// فتح شاشة إضافة رصيد الحساب للأدمن
+document.getElementById('adminBalanceBtn').addEventListener('click', () => {
+  addBalancePanel.hidden = false;
+  document.getElementById('addAmount').focus();
+});
+
+document.getElementById('closeAddBalance').addEventListener('click', () => {
+  addBalancePanel.hidden = true;
+});
+
+document.getElementById('addBalanceForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const addVal = Number(document.getElementById('addAmount').value);
+  const msg = document.getElementById('addBalanceMsg');
+  
+  if (addVal > 0) {
+    currentBalance += addVal;
+    updateBalanceUI();
+    msg.textContent = `تم إضافة ${addVal.toLocaleString()} ج.م للرصيد بنجاح ✓`;
+    setTimeout(() => {
+      addBalancePanel.hidden = true;
+      msg.textContent = '';
+      document.getElementById('addAmount').value = '';
+    }, 900);
   }
 });
