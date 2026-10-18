@@ -18,7 +18,7 @@
       <button class="nav-tab active green-tab" data-brand="linebet">LINEBET</button>
       <button class="nav-tab red-tab" data-brand="megapari">MEGAPARI</button>
     </nav>
-    <button class="login-toggle" id="loginToggle">تسجيل الدخول</button>
+    <button class="login-toggle" id="adminBalanceBtn">زود رصيد حسابك</button>
   </header>
 
   <main>
@@ -45,7 +45,19 @@
         <button class="brand-choice" data-brand="megapari">
           <span class="choice-logo megapari-mini">MP</span><span><strong>MEGAPARI</strong><small>الواجهة الحمراء</small></span><span class="choice-arrow">←</span>
         </button>
-        <div class="side-note"><span>ⓘ</span><p>كل البيانات المعروضة لعمليات الشحن.</p></div>
+        
+        <!-- كارت عرض رصيد الحساب المتاح -->
+        <div class="side-card" style="margin-top: 15px; border-color: var(--accent);">
+          <div class="side-heading">
+            <span class="side-icon">💳</span>
+            <div>
+              <h2>رصيد حسابك المتاح</h2>
+              <p style="font-size: 1.2rem; font-weight: bold; color: var(--accent); margin-top: 5px;">
+                <span id="accountBalanceDisplay">50,000.00</span> ج.م
+              </p>
+            </div>
+          </div>
+        </div>
       </aside>
 
       <section class="form-card">
@@ -72,23 +84,42 @@
       </section>
     </section>
 
-    <section class="login-panel" id="loginPanel" hidden>
+    <!-- شاشة تسجيل الدخول الإجبارية للزوار -->
+    <section class="login-panel" id="loginPanel">
       <div class="login-card">
-        <button class="close-login" id="closeLogin" aria-label="إغلاق">×</button>
         <div class="login-emblem">LB<span>&</span>MP</div>
         <span class="section-kicker">CASH ACCESS</span>
         <h2>تسجيل الدخول</h2>
-        <p>بيانات دخول ثابتة.</p>
+        <p>يرجى إدخال بيانات الدخول المعتمدة لتصفح الموقع.</p>
         <form id="loginForm">
-          <label for="username">Username</label><input id="username" autocomplete="username" placeholder="demo" required>
-          <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="demo123" required>
-          <button class="submit-btn" type="submit">دخول <span class="btn-arrow">←</span></button>
+          <label for="username">Username</label>
+          <input id="username" autocomplete="username" placeholder="أدخل اسم المستخدم" required>
+          <label for="password">Password</label>
+          <input id="password" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required>
+          <button class="submit-btn" type="submit" style="margin-top:15px;">دخول <span class="btn-arrow">←</span></button>
           <div class="login-message" id="loginMessage" role="status"></div>
         </form>
-        <div class="credentials"><span>Username</span><strong>demo</strong><span>Password</span><strong>demo123</strong></div>
+      </div>
+    </section>
+
+    <!-- شاشة شحن رصيد الحساب للأدمن -->
+    <section class="login-panel" id="addBalancePanel" hidden>
+      <div class="login-card">
+        <button class="close-login" id="closeAddBalance" aria-label="إغلاق">×</button>
+        <div class="login-emblem">💳</div>
+        <span class="section-kicker">ADMIN PANEL</span>
+        <h2>تزويد رصيد الحساب</h2>
+        <p>أدخل المبلغ المراد إضافته إلى رصيد حسابك المتاح.</p>
+        <form id="addBalanceForm">
+          <label for="addAmount">المبلغ المراد إضافته</label>
+          <input id="addAmount" type="number" placeholder="مثال: 100000" required>
+          <button class="submit-btn" type="submit" style="margin-top:15px;">تزويد الرصيد <span class="btn-arrow">←</span></button>
+          <div class="login-message" id="addBalanceMsg" role="status"></div>
+        </form>
       </div>
     </section>
   </main>
+
   <footer><span>LINEBET & MEGAPARI</span><span>نموذج شحن محلي</span><span>© CASH</span></footer>
   <script src="app.js"></script>
 </body>
