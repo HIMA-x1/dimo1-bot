@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151d">
+  <title>LINEBET & MEGAPARI — شحن</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="demo-ribbon">عمليات الشحن</div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="الصفحة الرئيسية">
+      <span class="brand-mark">LB<span>&</span>MP</span>
+      <span class="brand-name">LINEBET <b>&</b> MEGAPARI</span>
+    </a>
+    <nav class="switcher" aria-label="التنقل بين الصفحات">
+      <button class="nav-tab active green-tab" data-brand="linebet">LINEBET</button>
+      <button class="nav-tab red-tab" data-brand="megapari">MEGAPARI</button>
+    </nav>
+    <button class="login-toggle" id="loginToggle">تسجيل الدخول</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> واجهة شحن تفاعلية</div>
+        <h1>مرحبًا بك في <span id="heroBrand">LINEBET</span></h1>
+        <p>نموذج واجهة حديث لعمليات الشحن.</p>
+        <div class="hero-pills"><span>⚡ سريع وسلس</span><span>▣ متوافق مع الموبايل</span><span>✓ بيانات محلية فقط</span></div>
+      </div>
+      <div class="hero-logo-wrap">
+        <div class="logo-glow"></div>
+        <img id="heroLogo" src="assets/linebet-logo.jpg" alt="شعار LINEBET">
+        <span class="demo-stamp">CASH</span>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <aside class="side-card">
+        <div class="side-heading"><span class="side-icon">✦</span><div><h2>اختيار المنصة</h2><p>بدّل بين الواجهتين من الأعلى</p></div></div>
+        <button class="brand-choice selected" data-brand="linebet">
+          <span class="choice-logo linebet-mini">LB</span><span><strong>LINEBET</strong><small>الواجهة الخضراء</small></span><span class="choice-arrow">←</span>
+        </button>
+        <button class="brand-choice" data-brand="megapari">
+          <span class="choice-logo megapari-mini">MP</span><span><strong>MEGAPARI</strong><small>الواجهة الحمراء</small></span><span class="choice-arrow">←</span>
+        </button>
+        <div class="side-note"><span>ⓘ</span><p>كل البيانات المعروضة لعمليات الشحن.</p></div>
+      </aside>
+
+      <section class="form-card">
+        <div class="card-head">
+          <div><span class="section-kicker">CASH PANEL</span><h2>نموذج لعملية الشحن</h2><p>أدخل بيانات الشحن ثم اضغط Submit</p></div>
+          <div class="secure-icon">⌁</div>
+        </div>
+        <form id="demoForm" novalidate>
+          <label for="userId">User ID <span>10 أرقام بالضبط</span></label>
+          <div class="field-wrap"><span class="field-icon">#</span><input id="userId" name="userId" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="مثال: 1234567890" required><span class="field-check" id="idCheck">10</span></div>
+          <div class="hint" id="idHint">اكتب رقمًا مكوّنًا من 10 أرقام.</div>
+
+          <label for="amount">Amount <span>مبلغ الشحن</span></label>
+          <div class="field-wrap"><span class="field-icon">¤</span><input id="amount" name="amount" inputmode="decimal" autocomplete="off" placeholder="مثال: 250.00" required><span class="currency">كاش</span></div>
+          <div class="amount-chips"><button type="button" data-amount="100">100</button><button type="button" data-amount="250">250</button><button type="button" data-amount="500">500</button><button type="button" data-amount="1000">1000</button></div>
+
+          <button class="submit-btn" id="submitBtn" type="submit"><span>Submit</span><span class="btn-arrow">←</span></button>
+          <div class="result" id="result" role="status" aria-live="polite" hidden>
+            <div class="result-icon">✓</div>
+            <div><strong>تم تنفيذ عملية الشحن بنجاح ✅</strong><p id="resultDetails">ID: — | Amount: —</p></div>
+          </div>
+          <p class="privacy-line"><span>▣</span> بيانات الشحن.</p>
+        </form>
+      </section>
+    </section>
+
+    <section class="login-panel" id="loginPanel" hidden>
+      <div class="login-card">
+        <button class="close-login" id="closeLogin" aria-label="إغلاق">×</button>
+        <div class="login-emblem">LB<span>&</span>MP</div>
+        <span class="section-kicker">CASH ACCESS</span>
+        <h2>تسجيل الدخول</h2>
+        <p>بيانات دخول ثابتة.</p>
+        <form id="loginForm">
+          <label for="username">Username</label><input id="username" autocomplete="username" placeholder="demo" required>
+          <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="demo123" required>
+          <button class="submit-btn" type="submit">دخول <span class="btn-arrow">←</span></button>
+          <div class="login-message" id="loginMessage" role="status"></div>
+        </form>
+        <div class="credentials"><span>Username</span><strong>demo</strong><span>Password</span><strong>demo123</strong></div>
+      </div>
+    </section>
+  </main>
+  <footer><span>LINEBET & MEGAPARI</span><span>نموذج شحن محلي</span><span>© CASH</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
