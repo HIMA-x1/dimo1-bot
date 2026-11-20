@@ -2,77 +2,74 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10151d">
-  <title>ID CASH — شحن وتحويل</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0f17">
+  <title>ID CASH — Cash Now</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="demo-ribbon">ID CASH • عمليات الشحن والتحويل</div>
+  <div class="demo-ribbon">ID CASH • CASH NOW TRANSFER</div>
+
   <header class="topbar">
     <a class="brand" href="#" aria-label="الصفحة الرئيسية">
       <img class="site-logo-img" src="assets/idcash-logo.png" alt="شعار ID CASH">
-      <span class="brand-name">ID <b>CASH</b></span>
+      <div class="brand-text">
+        <span class="brand-name">ID <b>CASH</b></span>
+        <small>Cash Now Portal</small>
+      </div>
     </a>
-    <nav class="switcher" aria-label="التنقل بين المنصات">
-      <button class="nav-tab active green-tab" data-brand="linebet">LINEBET</button>
-      <button class="nav-tab red-tab" data-brand="megapari">MEGAPARI</button>
-      <button class="nav-tab gold-tab" data-brand="cashnow">Cash Now</button>
-    </nav>
-    <button class="login-toggle" id="adminBalanceBtn">زود رصيد حسابك</button>
+
+    <div class="top-currency-pill" id="topCurrencyBadge">
+      <span class="dot"></span>
+      <span id="topCurrencyText">مصري (ج.م) ✓</span>
+    </div>
+
+    <button class="login-toggle" id="adminBalanceBtn" type="button">+ تزويد الرصيد</button>
   </header>
 
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="live-dot"></span> ID CASH • واجهة شحن وتحويل تفاعلية</div>
-        <h1>مرحبًا بك في <span id="heroBrand">LINEBET</span></h1>
-        <p id="heroDesc">نموذج واجهة حديث لعمليات الشحن ضمن منصة ID CASH مع دعم العملة المصرية والدولار.</p>
+        <div class="eyebrow"><span class="live-dot"></span> ID CASH • منصة التحويل الفوري</div>
+        <h1>تحويل سريع عبر <span>Cash Now</span></h1>
+        <p>واجهة نظيفة وسريعة لإدارة عمليات التحويل والتحكم في الرصيد بعملتي الجنيه المصري والدولار الأمريكي.</p>
         <div class="hero-pills">
           <span id="currencyPill">✓ العملة: مصري (ج.م)</span>
-          <span>⚡ سريع وسلس</span>
-          <span>▣ متوافق مع الموبايل</span>
+          <span>⚡ تحويل فوري</span>
+          <span>📱 جاهز للموبايل</span>
         </div>
       </div>
+
       <div class="hero-logo-wrap">
         <div class="logo-glow"></div>
-        <img id="heroLogo" src="assets/linebet-logo.jpg" alt="شعار LINEBET">
-        <span class="demo-stamp" id="modeStamp">CASH</span>
+        <img id="heroLogo" src="assets/cashnow-logo.png" alt="شعار Cash Now">
+        <span class="demo-stamp" id="modeStamp">CASH NOW</span>
       </div>
     </section>
 
     <section class="workspace">
       <aside class="side-card">
         <div class="side-heading">
-          <span class="side-icon">✦</span>
+          <span class="side-icon">💼</span>
           <div>
-            <h2>اختيار المنصة</h2>
-            <p>بدّل بين المنصات الثلاث من هنا أو من الأعلى</p>
+            <h2>حساب Cash Now</h2>
+            <p>اختر العملة وتابع رصيدك الحالي</p>
           </div>
         </div>
 
-        <button class="brand-choice selected" data-brand="linebet">
-          <span class="choice-logo linebet-mini">LB</span>
-          <span><strong>LINEBET</strong><small>الواجهة الخضراء</small></span>
-          <span class="choice-arrow">←</span>
-        </button>
-
-        <button class="brand-choice" data-brand="megapari">
-          <span class="choice-logo megapari-mini">MP</span>
-          <span><strong>MEGAPARI</strong><small>الواجهة الحمراء</small></span>
-          <span class="choice-arrow">←</span>
-        </button>
-
-        <button class="brand-choice" data-brand="cashnow">
-          <img class="choice-logo-img" src="assets/cashnow-logo.png" alt="Cash Now">
-          <span><strong>Cash Now</strong><small>واجهة التحويل السريع</small></span>
-          <span class="choice-arrow">←</span>
-        </button>
+        <div class="active-platform-box">
+          <img src="assets/cashnow-logo.png" alt="Cash Now">
+          <div>
+            <strong>Cash Now</strong>
+            <small>القناة النشطة للتحويل</small>
+          </div>
+          <span class="active-badge">نشط ✓</span>
+        </div>
 
         <!-- اختيار العملة: مصري / دولار -->
         <div class="currency-box">
           <div class="currency-box-head">
-            <span>عملة الحساب والعملية</span>
+            <span>اختيار العملة</span>
             <small id="activeCurrencyTag">مصري ✓</small>
           </div>
           <div class="currency-switcher" role="group" aria-label="اختيار العملة">
@@ -90,36 +87,29 @@
         </div>
 
         <!-- كارت عرض رصيد الحساب المتاح -->
-        <div class="side-card balance-card">
-          <div class="side-heading">
-            <span class="side-icon">💳</span>
-            <div>
-              <h2>رصيد حسابك المتاح</h2>
-              <p class="balance-value">
-                <span id="accountBalanceDisplay">50,000.00</span>
-                <span id="accountCurrencyUnit">ج.م</span>
-              </p>
-            </div>
+        <div class="balance-card">
+          <span class="balance-label">الرصيد المتاح الآن</span>
+          <div class="balance-value">
+            <span id="accountBalanceDisplay">50,000.00</span>
+            <span id="accountCurrencyUnit">ج.م</span>
           </div>
+          <button type="button" class="quick-topup-btn" id="quickTopupBtn">إضافة رصيد للحساب</button>
         </div>
       </aside>
 
       <section class="form-card" id="mainActionCard">
         <div class="card-head">
           <div>
-            <span class="section-kicker" id="panelKicker">ID CASH • CASH PANEL</span>
-            <h2 id="panelTitle">نموذج لعملية الشحن</h2>
-            <p id="panelSubtitle">أدخل بيانات الشحن ثم اضغط Submit</p>
+            <span class="section-kicker" id="panelKicker">CASH NOW • TRANSFER</span>
+            <h2 id="panelTitle">قائمة تحويل Cash Now</h2>
+            <p id="panelSubtitle">أدخل رقم المستلم ومبلغ التحويل ثم اضغط إرسال التحويل</p>
           </div>
-          <div class="secure-icon" id="panelIcon">⌁</div>
+          <div class="secure-icon" id="panelIcon">⇄</div>
         </div>
-
-        <!-- شريط تنبيه وضع الدولار أو تحويل Cash Now -->
-        <div class="mode-banner" id="modeBanner" hidden></div>
 
         <form id="demoForm" novalidate>
           <label for="userId">
-            <span id="idLabelText">User ID</span>
+            <span id="idLabelText">رقم المستلم / ID</span>
             <span id="idReqText">10 أرقام بالضبط</span>
           </label>
           <div class="field-wrap">
@@ -130,8 +120,8 @@
           <div class="hint" id="idHint">اكتب رقمًا مكوّنًا من 10 أرقام.</div>
 
           <label for="amount">
-            <span id="amountLabelText">Amount</span>
-            <span id="amountSubText">مبلغ الشحن</span>
+            <span id="amountLabelText">مبلغ التحويل</span>
+            <span id="amountSubText">قيمة التحويل</span>
           </label>
           <div class="field-wrap">
             <span class="field-icon" id="amountSymbolIcon">¤</span>
@@ -147,54 +137,74 @@
           </div>
 
           <button class="submit-btn" id="submitBtn" type="submit">
-            <span id="submitBtnText">Submit</span>
+            <span id="submitBtnText">إرسال التحويل</span>
             <span class="btn-arrow">←</span>
           </button>
 
+          <!-- رسالة نتيجة التحويل من الأسفل -->
           <div class="result" id="result" role="status" aria-live="polite" hidden>
             <div class="result-icon">✓</div>
-            <div>
-              <strong id="resultTitle">تم تنفيذ عملية الشحن بنجاح ✅</strong>
+            <div class="result-body">
+              <strong id="resultTitle">تم إرسال التحويل بنجاح ✅</strong>
               <p id="resultDetails">ID: — | Amount: —</p>
+              <div class="result-tags">
+                <span id="resultCurrencyBadge">العملة: مصري (ج.م)</span>
+                <span id="resultRemaining">الرصيد المتبقي: —</span>
+              </div>
               <small id="resultMeta"></small>
             </div>
           </div>
 
-          <p class="privacy-line"><span>▣</span> <span id="privacyText">بيانات الشحن — ID CASH.</span></p>
+          <p class="privacy-line"><span>▣</span> <span id="privacyText">ID CASH • نظام تحويل Cash Now المحلي.</span></p>
         </form>
       </section>
     </section>
 
-    <!-- شاشة تسجيل الدخول الإجبارية للزوار -->
+    <!-- شاشة تسجيل الدخول المحسنة -->
     <section class="login-panel" id="loginPanel">
       <div class="login-card">
+        <div class="login-header-badge">ID CASH • SECURE GATE</div>
         <img class="login-logo-img" src="assets/idcash-logo.png" alt="شعار ID CASH">
-        <span class="section-kicker">ID CASH ACCESS</span>
-        <h2>تسجيل الدخول إلى ID CASH</h2>
-        <p>يرجى إدخال بيانات الدخول المعتمدة لتصفح الموقع.</p>
+        <h2>أهلًا بك في ID CASH</h2>
+        <p>سجّل دخولك للوصول إلى واجهة تحويل Cash Now وإدارة الرصيد.</p>
+
         <form id="loginForm">
-          <label for="username">Username</label>
-          <input id="username" autocomplete="username" placeholder="أدخل اسم المستخدم" required>
-          <label for="password">Password</label>
-          <input id="password" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required>
-          <button class="submit-btn" type="submit" style="margin-top:15px;">دخول <span class="btn-arrow">←</span></button>
+          <div class="input-group">
+            <label for="username">اسم المستخدم (Username)</label>
+            <input id="username" autocomplete="username" placeholder="أدخل اسم المستخدم" required>
+          </div>
+
+          <div class="input-group">
+            <label for="password">كلمة المرور (Password)</label>
+            <input id="password" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required>
+          </div>
+
+          <button class="submit-btn login-submit" type="submit">
+            <span>دخول إلى الحساب</span>
+            <span class="btn-arrow">←</span>
+          </button>
           <div class="login-message" id="loginMessage" role="status"></div>
         </form>
       </div>
     </section>
 
-    <!-- شاشة شحن رصيد الحساب للأدمن -->
+    <!-- شاشة تزويد الرصيد -->
     <section class="login-panel" id="addBalancePanel" hidden>
       <div class="login-card">
-        <button class="close-login" id="closeAddBalance" aria-label="إغلاق">×</button>
-        <img class="login-logo-img" src="assets/idcash-logo.png" alt="شعار ID CASH">
-        <span class="section-kicker">ID CASH • ADMIN PANEL</span>
+        <button class="close-login" id="closeAddBalance" type="button" aria-label="إغلاق">×</button>
+        <div class="login-header-badge">WALLET TOP-UP</div>
+        <img class="login-logo-img" src="assets/cashnow-logo.png" alt="شعار Cash Now">
         <h2>تزويد رصيد الحساب</h2>
-        <p id="addBalanceDesc">أدخل المبلغ المراد إضافته إلى رصيد حسابك المتاح.</p>
+        <p id="addBalanceDesc">أدخل المبلغ المراد إضافته إلى رصيدك الحالي في Cash Now.</p>
         <form id="addBalanceForm">
-          <label for="addAmount">المبلغ المراد إضافته</label>
-          <input id="addAmount" type="number" step="any" placeholder="مثال: 100000" required>
-          <button class="submit-btn" type="submit" style="margin-top:15px;">تزويد الرصيد <span class="btn-arrow">←</span></button>
+          <div class="input-group">
+            <label for="addAmount" id="addAmountLabel">المبلغ المراد إضافته</label>
+            <input id="addAmount" type="number" step="any" placeholder="مثال: 5000" required>
+          </div>
+          <button class="submit-btn login-submit" type="submit">
+            <span>تأكيد إضافة الرصيد</span>
+            <span class="btn-arrow">←</span>
+          </button>
           <div class="login-message" id="addBalanceMsg" role="status"></div>
         </form>
       </div>
@@ -202,10 +212,11 @@
   </main>
 
   <footer>
-    <span id="footerBrand">ID CASH</span>
-    <span>نموذج شحن وتحويل محلي</span>
+    <span>ID CASH • CASH NOW</span>
+    <span>واجهة تحويل محلية</span>
     <span id="footerCurrency">© ID CASH</span>
   </footer>
+
   <script src="app.js"></script>
 </body>
 </html>
