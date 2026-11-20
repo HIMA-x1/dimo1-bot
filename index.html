@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10151d">
-  <title>LINEBET & MEGAPARI — شحن</title>
+  <title>ID CASH — شحن وتحويل</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="demo-ribbon">عمليات الشحن</div>
+  <div class="demo-ribbon">ID CASH • عمليات الشحن والتحويل</div>
   <header class="topbar">
     <a class="brand" href="#" aria-label="الصفحة الرئيسية">
-      <span class="brand-mark">LB<span>&</span>MP</span>
-      <span class="brand-name">LINEBET <b>&</b> MEGAPARI</span>
+      <img class="site-logo-img" src="assets/idcash-logo.png" alt="شعار ID CASH">
+      <span class="brand-name">ID <b>CASH</b></span>
     </a>
-    <nav class="switcher" aria-label="التنقل بين الصفحات">
+    <nav class="switcher" aria-label="التنقل بين المنصات">
       <button class="nav-tab active green-tab" data-brand="linebet">LINEBET</button>
       <button class="nav-tab red-tab" data-brand="megapari">MEGAPARI</button>
+      <button class="nav-tab gold-tab" data-brand="cashnow">Cash Now</button>
     </nav>
     <button class="login-toggle" id="adminBalanceBtn">زود رصيد حسابك</button>
   </header>
@@ -24,62 +25,142 @@
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="live-dot"></span> واجهة شحن تفاعلية</div>
+        <div class="eyebrow"><span class="live-dot"></span> ID CASH • واجهة شحن وتحويل تفاعلية</div>
         <h1>مرحبًا بك في <span id="heroBrand">LINEBET</span></h1>
-        <p>نموذج واجهة حديث لعمليات الشحن.</p>
-        <div class="hero-pills"><span>⚡ سريع وسلس</span><span>▣ متوافق مع الموبايل</span><span>✓ بيانات محلية فقط</span></div>
+        <p id="heroDesc">نموذج واجهة حديث لعمليات الشحن ضمن منصة ID CASH مع دعم العملة المصرية والدولار.</p>
+        <div class="hero-pills">
+          <span id="currencyPill">✓ العملة: مصري (ج.م)</span>
+          <span>⚡ سريع وسلس</span>
+          <span>▣ متوافق مع الموبايل</span>
+        </div>
       </div>
       <div class="hero-logo-wrap">
         <div class="logo-glow"></div>
         <img id="heroLogo" src="assets/linebet-logo.jpg" alt="شعار LINEBET">
-        <span class="demo-stamp">CASH</span>
+        <span class="demo-stamp" id="modeStamp">CASH</span>
       </div>
     </section>
 
     <section class="workspace">
       <aside class="side-card">
-        <div class="side-heading"><span class="side-icon">✦</span><div><h2>اختيار المنصة</h2><p>بدّل بين الواجهتين من الأعلى</p></div></div>
+        <div class="side-heading">
+          <span class="side-icon">✦</span>
+          <div>
+            <h2>اختيار المنصة</h2>
+            <p>بدّل بين المنصات الثلاث من هنا أو من الأعلى</p>
+          </div>
+        </div>
+
         <button class="brand-choice selected" data-brand="linebet">
-          <span class="choice-logo linebet-mini">LB</span><span><strong>LINEBET</strong><small>الواجهة الخضراء</small></span><span class="choice-arrow">←</span>
+          <span class="choice-logo linebet-mini">LB</span>
+          <span><strong>LINEBET</strong><small>الواجهة الخضراء</small></span>
+          <span class="choice-arrow">←</span>
         </button>
+
         <button class="brand-choice" data-brand="megapari">
-          <span class="choice-logo megapari-mini">MP</span><span><strong>MEGAPARI</strong><small>الواجهة الحمراء</small></span><span class="choice-arrow">←</span>
+          <span class="choice-logo megapari-mini">MP</span>
+          <span><strong>MEGAPARI</strong><small>الواجهة الحمراء</small></span>
+          <span class="choice-arrow">←</span>
         </button>
-        
+
+        <button class="brand-choice" data-brand="cashnow">
+          <img class="choice-logo-img" src="assets/cashnow-logo.png" alt="Cash Now">
+          <span><strong>Cash Now</strong><small>واجهة التحويل السريع</small></span>
+          <span class="choice-arrow">←</span>
+        </button>
+
+        <!-- اختيار العملة: مصري / دولار -->
+        <div class="currency-box">
+          <div class="currency-box-head">
+            <span>عملة الحساب والعملية</span>
+            <small id="activeCurrencyTag">مصري ✓</small>
+          </div>
+          <div class="currency-switcher" role="group" aria-label="اختيار العملة">
+            <button type="button" class="currency-btn active" data-currency="egp">
+              <span class="check-mark">✓</span>
+              <span>مصري</span>
+              <small>ج.م</small>
+            </button>
+            <button type="button" class="currency-btn" data-currency="usd">
+              <span class="check-mark">✓</span>
+              <span>دولار</span>
+              <small>$</small>
+            </button>
+          </div>
+        </div>
+
         <!-- كارت عرض رصيد الحساب المتاح -->
-        <div class="side-card" style="margin-top: 15px; border-color: var(--accent);">
+        <div class="side-card balance-card">
           <div class="side-heading">
             <span class="side-icon">💳</span>
             <div>
               <h2>رصيد حسابك المتاح</h2>
-              <p style="font-size: 1.2rem; font-weight: bold; color: var(--accent); margin-top: 5px;">
-                <span id="accountBalanceDisplay">50,000.00</span> ج.م
+              <p class="balance-value">
+                <span id="accountBalanceDisplay">50,000.00</span>
+                <span id="accountCurrencyUnit">ج.م</span>
               </p>
             </div>
           </div>
         </div>
       </aside>
 
-      <section class="form-card">
+      <section class="form-card" id="mainActionCard">
         <div class="card-head">
-          <div><span class="section-kicker">CASH PANEL</span><h2>نموذج لعملية الشحن</h2><p>أدخل بيانات الشحن ثم اضغط Submit</p></div>
-          <div class="secure-icon">⌁</div>
+          <div>
+            <span class="section-kicker" id="panelKicker">ID CASH • CASH PANEL</span>
+            <h2 id="panelTitle">نموذج لعملية الشحن</h2>
+            <p id="panelSubtitle">أدخل بيانات الشحن ثم اضغط Submit</p>
+          </div>
+          <div class="secure-icon" id="panelIcon">⌁</div>
         </div>
+
+        <!-- شريط تنبيه وضع الدولار أو تحويل Cash Now -->
+        <div class="mode-banner" id="modeBanner" hidden></div>
+
         <form id="demoForm" novalidate>
-          <label for="userId">User ID <span>10 أرقام بالضبط</span></label>
-          <div class="field-wrap"><span class="field-icon">#</span><input id="userId" name="userId" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="مثال: 1234567890" required><span class="field-check" id="idCheck">10</span></div>
+          <label for="userId">
+            <span id="idLabelText">User ID</span>
+            <span id="idReqText">10 أرقام بالضبط</span>
+          </label>
+          <div class="field-wrap">
+            <span class="field-icon">#</span>
+            <input id="userId" name="userId" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="مثال: 1234567890" required>
+            <span class="field-check" id="idCheck">10</span>
+          </div>
           <div class="hint" id="idHint">اكتب رقمًا مكوّنًا من 10 أرقام.</div>
 
-          <label for="amount">Amount <span>مبلغ الشحن</span></label>
-          <div class="field-wrap"><span class="field-icon">¤</span><input id="amount" name="amount" inputmode="decimal" autocomplete="off" placeholder="مثال: 250.00" required><span class="currency">كاش</span></div>
-          <div class="amount-chips"><button type="button" data-amount="100">100</button><button type="button" data-amount="250">250</button><button type="button" data-amount="500">500</button><button type="button" data-amount="1000">1000</button></div>
+          <label for="amount">
+            <span id="amountLabelText">Amount</span>
+            <span id="amountSubText">مبلغ الشحن</span>
+          </label>
+          <div class="field-wrap">
+            <span class="field-icon" id="amountSymbolIcon">¤</span>
+            <input id="amount" name="amount" inputmode="decimal" autocomplete="off" placeholder="مثال: 250.00" required>
+            <span class="currency" id="currencyBadge">كاش</span>
+          </div>
 
-          <button class="submit-btn" id="submitBtn" type="submit"><span>Submit</span><span class="btn-arrow">←</span></button>
+          <div class="amount-chips" id="amountChips">
+            <button type="button" data-amount="100">100</button>
+            <button type="button" data-amount="250">250</button>
+            <button type="button" data-amount="500">500</button>
+            <button type="button" data-amount="1000">1000</button>
+          </div>
+
+          <button class="submit-btn" id="submitBtn" type="submit">
+            <span id="submitBtnText">Submit</span>
+            <span class="btn-arrow">←</span>
+          </button>
+
           <div class="result" id="result" role="status" aria-live="polite" hidden>
             <div class="result-icon">✓</div>
-            <div><strong>تم تنفيذ عملية الشحن بنجاح ✅</strong><p id="resultDetails">ID: — | Amount: —</p></div>
+            <div>
+              <strong id="resultTitle">تم تنفيذ عملية الشحن بنجاح ✅</strong>
+              <p id="resultDetails">ID: — | Amount: —</p>
+              <small id="resultMeta"></small>
+            </div>
           </div>
-          <p class="privacy-line"><span>▣</span> بيانات الشحن.</p>
+
+          <p class="privacy-line"><span>▣</span> <span id="privacyText">بيانات الشحن — ID CASH.</span></p>
         </form>
       </section>
     </section>
@@ -87,9 +168,9 @@
     <!-- شاشة تسجيل الدخول الإجبارية للزوار -->
     <section class="login-panel" id="loginPanel">
       <div class="login-card">
-        <div class="login-emblem">LB<span>&</span>MP</div>
-        <span class="section-kicker">CASH ACCESS</span>
-        <h2>تسجيل الدخول</h2>
+        <img class="login-logo-img" src="assets/idcash-logo.png" alt="شعار ID CASH">
+        <span class="section-kicker">ID CASH ACCESS</span>
+        <h2>تسجيل الدخول إلى ID CASH</h2>
         <p>يرجى إدخال بيانات الدخول المعتمدة لتصفح الموقع.</p>
         <form id="loginForm">
           <label for="username">Username</label>
@@ -106,13 +187,13 @@
     <section class="login-panel" id="addBalancePanel" hidden>
       <div class="login-card">
         <button class="close-login" id="closeAddBalance" aria-label="إغلاق">×</button>
-        <div class="login-emblem">💳</div>
-        <span class="section-kicker">ADMIN PANEL</span>
+        <img class="login-logo-img" src="assets/idcash-logo.png" alt="شعار ID CASH">
+        <span class="section-kicker">ID CASH • ADMIN PANEL</span>
         <h2>تزويد رصيد الحساب</h2>
-        <p>أدخل المبلغ المراد إضافته إلى رصيد حسابك المتاح.</p>
+        <p id="addBalanceDesc">أدخل المبلغ المراد إضافته إلى رصيد حسابك المتاح.</p>
         <form id="addBalanceForm">
           <label for="addAmount">المبلغ المراد إضافته</label>
-          <input id="addAmount" type="number" placeholder="مثال: 100000" required>
+          <input id="addAmount" type="number" step="any" placeholder="مثال: 100000" required>
           <button class="submit-btn" type="submit" style="margin-top:15px;">تزويد الرصيد <span class="btn-arrow">←</span></button>
           <div class="login-message" id="addBalanceMsg" role="status"></div>
         </form>
@@ -120,7 +201,11 @@
     </section>
   </main>
 
-  <footer><span>LINEBET & MEGAPARI</span><span>نموذج شحن محلي</span><span>© CASH</span></footer>
+  <footer>
+    <span id="footerBrand">ID CASH</span>
+    <span>نموذج شحن وتحويل محلي</span>
+    <span id="footerCurrency">© ID CASH</span>
+  </footer>
   <script src="app.js"></script>
 </body>
 </html>
