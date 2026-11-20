@@ -1,0 +1,39 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Create Cordova WebView Project & Build APK
+        run: |
+          npm install -g cordova
+          cordova create app com.idcash.cashnow IDCash
+          cd app
+          cordova platform add android
+          rm -rf www/*
+          cp -r ../* www/
+          rm -rf www/app www/.github
+          cordova build android
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ID-CASH-APK
+          path: app/platforms/android/app/build/outputs/apk/debug/app-debug.apk
